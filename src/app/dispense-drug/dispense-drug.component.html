@@ -14,6 +14,16 @@
             </span>
       </div>
 </div>
+<h1 style="margin-top: 50px; text-align: center; margin-bottom: 15px;">ระบุอาการป่วย</h1>
+<div style="margin-bottom: 20px; display: flex; justify-content: center;">
+      <div >
+            <span class="p-float-label" >
+                  <input id="float-input" [(ngModel)]="data_for_despencer[0].illness" type="text" required #illness_st_rq="ngModel" pInputText> 
+                  <label for="float-input">ระบุอาการป่วย</label>
+                  <p-message *ngIf="illness_st_rq.invalid && illness_st_rq.touched" severity="error" text="คุณยังไม่ได้ระบุอาการป่วย"></p-message>
+            </span>
+      </div>
+</div>
 <h1 style="margin-top: 50px; text-align: center; margin-bottom: 5px;">ตารางข้อมูลยา</h1>
 <div class="search-data">
     <button class="btn" (click)="Ontest(0)">{{active_drug[0].Text}}</button>
@@ -78,6 +88,7 @@
         <table class="result-data">
             <tr>
                 <th>ชื่อผู้รับยา</th>
+                <th>อาการป่วย</th>
                 <th>ยา</th>
                 <th>ผู้จ่ายยา</th>
                 <th>วันที่</th>
@@ -85,6 +96,7 @@
             </tr>
             <tr>
                 <td><p>{{data_for_despencer[0].drugRecipient}}</p></td>
+                <td><p>{{data_for_despencer[0].illness}}</p></td>
                 <td><p *ngFor="let i of selected_drug">{{i}},</p></td>
                 <td><p>{{data_for_despencer[0].nameDispenser}}</p></td>
                 <td><p>{{time.getDate()}}/{{time.getMonth()+1}}/{{time.getFullYear()}}</p></td>
@@ -92,11 +104,11 @@
             </tr>
         </table>
     </div>
-    <div style="width: 800px; display: flex; justify-content: end; margin-top: 5px;">
+    <div style="width: 1200px; display: flex; justify-content: end; margin-top: 5px;">
         <p class="buttonChange" (click)="def_change_time()" style="padding: 5px;">อัปเดตเวลา</p>
     </div>
     <div style="margin-top: 25px; display: flex; justify-content: center;">
-        <p-button label="Submit" [disabled]="!!id_st_rq.invalid " icon="pi pi-check" (onClick)="showConfirm()"></p-button>
+        <p-button label="Submit" [disabled]="!!id_st_rq.invalid || !!illness_st_rq.invalid" icon="pi pi-check" (onClick)="showConfirm()"></p-button>
       </div>
 </div>
 

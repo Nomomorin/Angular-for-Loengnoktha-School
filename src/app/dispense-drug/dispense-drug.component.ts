@@ -46,6 +46,7 @@ export class DispenseDrugComponent {
   selected_drug=[""]
   data_for_despencer= [{
     drugRecipient: '',
+    illness: '',
     list_drug: '',
     nameDispenser: '',
     date: '',

@@ -23,7 +23,7 @@
                 <td *ngFor="let col of columns" >
                     <p *ngIf="rowData[col.field] != true && rowData[col.field] != false">{{rowData[col.field]}}</p>
                     <p *ngIf="rowData[col.field] == true && col.header != 'id'">มี</p>
-                    <p *ngIf="rowData[col.field] == false && col.header != 'id'">หมด</p>
+                    <p *ngIf="rowData[col.field] == false && col.header != 'id' && col.header != 'more_drug'">หมด</p>
                     <p class="buttonChange" *ngIf="col.field == 'edit' && rowData['have_drug'] == false" (click)="change_drug_false(rowData['id'])">มี</p>
                     <p class="buttonChange" *ngIf="col.field == 'edit' && rowData['have_drug'] == true" (click)="change_drug_true(rowData['id'])">หมด</p>
                 </td>

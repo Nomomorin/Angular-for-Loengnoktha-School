@@ -26,10 +26,11 @@ export class PrescriptionHistoryComponent {
   active_ = [{text:'ปิดตารางข้อมูล',active:true}]
   data_history:history[] =[]
   data_for_export = [{
-    drugRecipient:'ชื่อคนรับยา',list_drug:'ชื่อยา',nameDispenser:'ชื่อผู้จ่ายยา',date:'วันที่',time:'เวลา'
+    drugRecipient:'ชื่อคนรับยา',illness:'อาการป่วย',list_drug:'ชื่อยา',nameDispenser:'ชื่อผู้จ่ายยา',date:'วันที่',time:'เวลา'
   }]
   cols =[
   { header: 'ชื่อคนรับยา', field: 'drugRecipient' },
+  { header: 'อาการป่วย',field:'illness'},
   { header: 'ชื่อยา', field: 'list_drug' },
   { header: 'ชื่อผู้จ่ายยา', field: 'nameDispenser' },
   { header: 'วันที่', field: 'date' },
@@ -38,14 +39,14 @@ export class PrescriptionHistoryComponent {
 
   push_data(value:any){
     var data = {
-      drugRecipient:value.drugRecipient,list_drug:value.list_drug,nameDispenser:value.nameDispenser,date:value.date,time:value.time
+      drugRecipient:value.drugRecipient,illness:value.illness,list_drug:value.list_drug,nameDispenser:value.nameDispenser,date:value.date,time:value.time
     }
     this.data_for_export.push(data)
   }
   push_all_data(){
     for(var i=0; i<this.data_history.length; i++){
       var data = {
-        drugRecipient:this.data_history[i].drugRecipient,list_drug:this.data_history[i].list_drug,nameDispenser:this.data_history[i].nameDispenser,date:this.data_history[i].date,time:this.data_history[i].time
+        drugRecipient:this.data_history[i].drugRecipient,illness:this.data_history[i].illness,list_drug:this.data_history[i].list_drug,nameDispenser:this.data_history[i].nameDispenser,date:this.data_history[i].date,time:this.data_history[i].time
       }
       this.data_for_export.push(data)
     }
@@ -61,7 +62,7 @@ export class PrescriptionHistoryComponent {
   }
   delete_data_all(){
     this.data_for_export = [{
-      drugRecipient:'ชื่อคนรับยา',list_drug:'ชื่อยา',nameDispenser:'ชื่อผู้จ่ายยา',date:'วันที่',time:'เวลา'
+      drugRecipient:'ชื่อคนรับยา',illness:"อาการป่วย",list_drug:'ชื่อยา',nameDispenser:'ชื่อผู้จ่ายยา',date:'วันที่',time:'เวลา'
     }]
   }
   search_(value:any,id:number){
@@ -126,7 +127,7 @@ export class PrescriptionHistoryComponent {
     var head = [["ชื่อคนรับยา","ชื่อยา","ชื่อผู้จ่ายยา",'วันที่','เวลา']]
     var data_copy = this.data_for_export.concat();
     data_copy.shift()
-    var data = data_copy.map((p,i=2)=>[p.drugRecipient,p.list_drug,p.nameDispenser,p.date,p.time])
+    var data = data_copy.map((p,i=2)=>[p.drugRecipient,p.illness,p.list_drug,p.nameDispenser,p.date,p.time])
     var content = {
       head:head,
       body:data,

@@ -38,6 +38,7 @@
           <table class="result-data" id="data_table">
               <tr>
                   <th>ชื่อผู้รับยา</th>
+                  <th>อาการป่วย</th>
                   <th>ยา</th>
                   <th>ผู้จ่ายยา</th>
                   <th>วันที่</th>
@@ -46,6 +47,7 @@
               </tr>
               <tr *ngFor="let i of data_for_export;let x = index">
                   <td *ngIf="x !=0"><p>{{i.drugRecipient}}</p></td>
+                  <td *ngIf="x !=0"><p>{{i.illness}}</p></td>
                   <td *ngIf="x !=0"><p>{{i.list_drug}}</p></td>
                   <td *ngIf="x !=0"><p>{{i.nameDispenser}}</p></td>
                   <td *ngIf="x !=0"><p>{{i.date}}</p></td>
