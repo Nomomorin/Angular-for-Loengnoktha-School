@@ -1,27 +1,32 @@
-# FontEnd
+# ระบบจ่ายยาโรงเรียนเลิงนกทา
+font end ระบบจ่ายยาของโรงเรียนเลิงนกทา พัฒนาด้วยเทคโนโลยี Angular 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
+## สารบัญ
 
-## Development server
+ - [ขั้นตอนการติดตั้ง](#%E0%B8%82%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B8%95%E0%B8%AD%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B1%E0%B9%89%E0%B8%87)
+ - [วิธีการรัน](#%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A3%E0%B8%B1%E0%B8%99)
+ - [ระบบ](#%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A)
+ - [เครดิต](#%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%94%E0%B8%B4%E0%B8%95)
+## ขั้นตอนการติดตั้ง
+`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+       git clone https://github.com/Nomomorin/Angular-for-Loengnoktha-School.git
 
-## Code scaffolding
+ 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## วิธีการรัน
 
-## Build
+ `npm run start`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## ระบบ
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    ดูรายชื่อนักเรียน
+    เพิ่ม-ลบ-แก้ รายชื่อนักเรียน
+    คลังยา
+    จ่ายยา
+    ดูประวัติการจ่ายยา
+    บันทึกประวัติการจ่ายยา(Excel, Pdf)
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## เครดิต
+Phuphirawit  - (Developer)
