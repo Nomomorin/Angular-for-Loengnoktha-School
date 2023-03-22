@@ -1,0 +1,46 @@
+<p-toast></p-toast>
+<div  style="display: flex; justify-content: center; margin-top: 20px; font-size: 25px; color: white; ">
+      <h1 [style]="{backgroundColor:'var(--blue-500)'}" style="padding: 10px; border-radius: 10px;">
+          กรอกข้อมูลยา
+      </h1>
+  </div>
+  <div style="margin-top: 50px; display: flex; justify-content: center;">
+  <div >
+      <span class="p-float-label" style="margin-top: 25px; margin-bottom: 25px;">
+            <input id="float-input" [(ngModel)]="name_drug" required #name_="ngModel" type="text" pInputText> 
+            <label for="float-input">ชื่อยา</label>
+            <p-message *ngIf="name_.invalid && name_.touched" severity="error" text="คุณยังไม่ได้กรอกชื่อยา"></p-message>
+      </span>
+        <span class="p-float-label" >
+            <textarea id="float-input" rows="5" cols="42" [(ngModel)]="detail_drug" pInputTextarea></textarea>
+            <label for="float-input">รายละเอียดยา</label>
+        </span>
+        <span class="p-float-label" style="margin-top: 25px;">
+            <textarea id="float-input" rows="5" cols="42" [(ngModel)]="more_drug" pInputTextarea></textarea>
+            <label for="float-input">อื่นๆ</label>
+        </span>
+      <div style="margin-top: 25px; display: flex; justify-content: center;">
+        <p-button label="Submit" [disabled]="!!name_.invalid " icon="pi pi-check" (onClick)="showConfirm()"></p-button>
+      </div>
+      </div>
+  </div>
+  <app-flutter></app-flutter>
+<p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+      <ng-template let-message pTemplate="message">
+          <div class="flex flex-column" style="flex: 1">
+              <div class="text-center">
+                  <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                  <h4>{{message.summary}}</h4>
+                  <p>{{message.detail}}</p>
+              </div>
+              <div class="grid p-fluid" style="display: flex; justify-content: space-evenly;">
+                  <div class="col-6">
+                      <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+                  </div>
+                  <div class="col-6">
+                      <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+                  </div>
+              </div>
+          </div>
+      </ng-template>
+  </p-toast>

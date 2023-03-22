@@ -1,0 +1,65 @@
+<div style=" display: flex; justify-content: center; margin-top: 50px; color: white;">
+    <h1 [style]="{backgroundColor:'var(--blue-500)'}" style="padding: 10px; border-radius: 10px;">
+      ประวัติการจ่ายยา
+    </h1>
+</div>
+<div class="search-data">
+        <button class="btn" (click)="Ontest()">{{active_[0].text}}</button>
+      <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" style="margin-right: 5px;" pInputText placeholder="ค้นหาวันที่....(1/4/2023)" (input)="search_(value_search_date,0)" [(ngModel)]="value_search_date" />
+        </span>
+      <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="ค้นหาชื่อผู้จ่ายยา...." (input)="search_(value_search_name,1)" [(ngModel)]="value_search_name" />
+      </span>
+  </div>
+<p-table [columns]="cols" *ngIf="active_[0].active" [value]="data_history" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+              <th *ngFor="let col of columns">
+                  <p *ngIf="col.header != 'เลือก'">{{col.header}}</p>
+                  <p class="buttonChange" *ngIf="col.field == 'select'" (click)="push_all_data()" >เพิ่มทั้งหมด</p>
+              </th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+              <td *ngFor="let col of columns">
+                  <p class="buttonChange" *ngIf="col.field == 'select'" (click)="push_data(rowData)" >เพิ่ม</p>
+                  <!-- <p class="buttonChange" *ngIf="col.field == 'select'" style="margin-top: 5px;background-color: var(--red-500);" (click)="delete_data(rowData)">ลบ</p> -->
+                  {{rowData[col.field]}}
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+  <div class="head-result">
+      <div>
+          <table class="result-data" id="data_table">
+              <tr>
+                  <th>ชื่อผู้รับยา</th>
+                  <th>ยา</th>
+                  <th>ผู้จ่ายยา</th>
+                  <th>วันที่</th>
+                  <th>เวลา</th>
+                  <th><p class="buttonChange" style="margin-top: 5px;background-color: var(--red-500); font-size: 17px;" (click)="delete_data_all()">ลบทั้งหมด</p></th>
+              </tr>
+              <tr *ngFor="let i of data_for_export;let x = index">
+                  <td *ngIf="x !=0"><p>{{i.drugRecipient}}</p></td>
+                  <td *ngIf="x !=0"><p>{{i.list_drug}}</p></td>
+                  <td *ngIf="x !=0"><p>{{i.nameDispenser}}</p></td>
+                  <td *ngIf="x !=0"><p>{{i.date}}</p></td>
+                  <td *ngIf="x !=0"><p>{{i.time}}</p></td>
+                  <td *ngIf="x !=0"><p class="buttonChange" style="margin-top: 5px;background-color: var(--red-500);" (click)="delete_data(x)">ลบ</p></td>
+              </tr>
+          </table>
+      </div>
+      <div style="display: flex;">
+            <button pButton pRipple style="margin: 10px;" type="button" label="Excel" (click)="exportToExcel()" class="p-button-raised p-button-success"></button>
+            <button pButton pRipple style="margin: 10px;" type="button" label="Pdf" class="p-button-raised p-button-danger" (click)="exportToPdf()"></button>
+      </div>
+</div>
+
+
+<app-flutter></app-flutter>
+

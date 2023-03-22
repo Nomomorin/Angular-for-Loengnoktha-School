@@ -1,0 +1,51 @@
+<p-toast></p-toast>
+<div style=" display: flex; justify-content: center; margin-top: 50px; color: white;">
+    <h1 [style]="{backgroundColor:'var(--blue-500)'}" style="padding: 10px; border-radius: 10px;">
+        ข้อมูลนักเรียนทั้งหมด
+    </h1>
+</div>
+<div class="search-data">
+    <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="ค้นหาชื่อนักเรียน...." (input)="search_name_(value_search_name)" [(ngModel)]="value_search_name" />
+    </span>
+</div>
+<p-table [columns]="cols" [value]="dataStudent" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+              <th *ngFor="let col of columns">
+                  {{col.header}}
+              </th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+              <td *ngFor="let col of columns">
+                  <i class="pi pi-pencil" *ngIf="col.field == 'edit'" routerLink="/editData/{{rowData['id']}}" routerLinkActive="active" ariaCurrentWhenActive="page" style="cursor: pointer; " [ngStyle]="{color:'var(--blue-500)'}"></i>
+                  <i class="pi pi-times-circle" *ngIf="col.field == 'edit'" (click)="showConfirm(rowData['id'])"   style="cursor: pointer; margin-left: 10px;" [ngStyle]="{color:'var(--red-500)'}"></i>
+                  {{rowData[col.field]}}
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+  <app-flutter></app-flutter>
+
+  <p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="grid p-fluid" style="display: flex; justify-content: space-evenly;">
+                <div class="col-6">
+                    <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+                </div>
+                <div class="col-6">
+                    <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

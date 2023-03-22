@@ -1,0 +1,33 @@
+<div style=" display: flex; justify-content: center; margin-top: 50px; color: white;">
+      <h1 [style]="{backgroundColor:'var(--blue-500)'}" style="padding: 10px; border-radius: 10px;">
+          คลังยา
+      </h1>
+  </div>
+
+  <div class="search-data">
+      <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="ค้นหาชื่อยา...." (input)="search_name_(value_search_name)" [(ngModel)]="value_search_name" />
+      </span>
+  </div>
+  <p-table [columns]="cols" [value]="dataDrug" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns" >
+                    <p *ngIf="rowData[col.field] != true && rowData[col.field] != false">{{rowData[col.field]}}</p>
+                    <p *ngIf="rowData[col.field] == true && col.header != 'id'">มี</p>
+                    <p *ngIf="rowData[col.field] == false && col.header != 'id'">หมด</p>
+                    <p class="buttonChange" *ngIf="col.field == 'edit' && rowData['have_drug'] == false" (click)="change_drug_false(rowData['id'])">มี</p>
+                    <p class="buttonChange" *ngIf="col.field == 'edit' && rowData['have_drug'] == true" (click)="change_drug_true(rowData['id'])">หมด</p>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <app-flutter></app-flutter>

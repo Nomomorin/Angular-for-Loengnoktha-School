@@ -1,0 +1,123 @@
+<p-toast></p-toast>
+<div  style="display: flex; justify-content: center; margin-top: 20px; font-size: 25px; color: white; ">
+      <h1 [style]="{backgroundColor:'var(--blue-500)'}" style="padding: 10px; border-radius: 10px;">
+          จ่ายยา
+      </h1>
+</div>
+<h1 style="margin-top: 50px; text-align: center; margin-bottom: 15px;">กรอกชื่อผู้จ่ายยา</h1>
+<div style="margin-bottom: 20px; display: flex; justify-content: center;">
+      <div >
+            <span class="p-float-label" >
+                  <input id="float-input" [(ngModel)]="data_for_despencer[0].nameDispenser" type="text" required #id_st_rq="ngModel" pInputText> 
+                  <label for="float-input">ชื่อผู้จ่ายยา</label>
+                  <p-message *ngIf="id_st_rq.invalid && id_st_rq.touched" severity="error" text="คุณยังไม่ได้กรอกชื่อผู้จ่ายยา"></p-message>
+            </span>
+      </div>
+</div>
+<h1 style="margin-top: 50px; text-align: center; margin-bottom: 5px;">ตารางข้อมูลยา</h1>
+<div class="search-data">
+    <button class="btn" (click)="Ontest(0)">{{active_drug[0].Text}}</button>
+    <span class="p-input-icon-left" *ngIf="active_drug[0].status">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="ค้นหาชื่อยา...." (input)="search_name_(value_search_name_drug,1)" [(ngModel)]="value_search_name_drug" />
+    </span>
+</div>
+
+<p-table [value]="data_drug"  dataKey="code" *ngIf="active_drug[0].status" [tableStyle]="{'min-width': '50rem','margin-bottom':'50px'}">
+      <ng-template pTemplate="header">
+
+          <tr>
+              <th>ชื่อยา</th>
+              <th>รายละเอียด</th>
+              <th>อื่นๆ</th>
+              <th>สถานะ</th>
+              <th>เพิ่มยาลงตะกร้า</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-drug>
+          <tr *ngIf="drug.have_drug == true">
+              <td>{{drug.name_drug}}</td>
+              <td>{{drug.detail_drug}}</td>
+              <td>{{drug.more_drug}}</td>
+              <td>มี</td>
+              <td><p class="buttonChange"*ngIf="!selected_drug.includes(drug.name_drug)"  (click)="push_drug(drug.name_drug) ">เพิ่มยา</p>
+                <p class="buttonChange" style="margin-top: 5px;background-color: var(--red-500);"  *ngIf="selected_drug.includes(drug.name_drug)" (click)="delete_drug(drug.name_drug)">ลบ</p></td>
+          </tr>
+      </ng-template>
+  </p-table>
+
+  <h1 style="margin-top: 50px; text-align: center; margin-bottom: 5px;">ตารางข้อมูลผู้รับยา</h1>
+  <div class="search-data">
+    <button class="btn" (click)="Ontest(1)">{{active_drug[1].Text}}</button>
+    <span class="p-input-icon-left" *ngIf="active_drug[1].status">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="ค้นหาชื่อนักเรียน...." (input)="search_name_(value_search_name_srudent,2)" [(ngModel)]="value_search_name_srudent" />
+    </span>
+</div>
+  <p-table [columns]="cols" [value]="data_student" *ngIf="active_drug[1].status" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                <p class="buttonChange" *ngIf="col.field == 'drug_recipient' && !data_for_despencer[0].drugRecipient.includes(rowData['name'])" (click)="push_student(rowData['name'])">เลือก</p>
+                <p class="buttonChange" style="margin-top: 5px;background-color: var(--red-500);"  *ngIf="col.field == 'drug_recipient' && data_for_despencer[0].drugRecipient.includes(rowData['name'])" (click)="data_for_despencer[0].drugRecipient = ''">ลบ</p>
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<h1 style="margin-top: 50px; text-align: center; margin-bottom: 5px;">ตารางสรุปข้อมูล</h1>
+<div class="head-result">
+    <div>
+        <table class="result-data">
+            <tr>
+                <th>ชื่อผู้รับยา</th>
+                <th>ยา</th>
+                <th>ผู้จ่ายยา</th>
+                <th>วันที่</th>
+                <th>เวลา</th>
+            </tr>
+            <tr>
+                <td><p>{{data_for_despencer[0].drugRecipient}}</p></td>
+                <td><p *ngFor="let i of selected_drug">{{i}},</p></td>
+                <td><p>{{data_for_despencer[0].nameDispenser}}</p></td>
+                <td><p>{{time.getDate()}}/{{time.getMonth()+1}}/{{time.getFullYear()}}</p></td>
+                <td><p>{{time.getHours()}}:{{time.getMinutes()}}:{{time.getSeconds()}}</p></td>
+            </tr>
+        </table>
+    </div>
+    <div style="width: 800px; display: flex; justify-content: end; margin-top: 5px;">
+        <p class="buttonChange" (click)="def_change_time()" style="padding: 5px;">อัปเดตเวลา</p>
+    </div>
+    <div style="margin-top: 25px; display: flex; justify-content: center;">
+        <p-button label="Submit" [disabled]="!!id_st_rq.invalid " icon="pi pi-check" (onClick)="showConfirm()"></p-button>
+      </div>
+</div>
+
+<app-flutter></app-flutter>
+
+<p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="grid p-fluid" style="display: flex; justify-content: space-evenly;">
+                <div class="col-6">
+                    <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+                </div>
+                <div class="col-6">
+                    <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
